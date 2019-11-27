@@ -14,7 +14,7 @@ jobs:
       with:
         dotnet-version: 3.0.100
     - name: Build with dotnet
-      run: dotnet publish -r win-x64 -c Release /p:PublishSingleFile=true
+      run: dotnet publish -c Release /p:PublishSingleFile=true
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
