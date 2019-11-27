@@ -21,4 +21,4 @@ jobs:
         # Artifact name
         name: wiremockStandalone.exe
         # Directory containing files to upload
-        path: output
+        path: WiremockStandalone\bin\Release\netcoreapp3.0\win-x64\publish
