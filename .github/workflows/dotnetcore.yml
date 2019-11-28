@@ -19,6 +19,6 @@ jobs:
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: WiremockStandalone.dll
+        name: WiremockStandalone.exe
         # Directory containing files to upload
-        path: WiremockStandalone/bin/Release/netcoreapp3.0/win-x64/
+        path: WiremockStandalone/bin/Release/netcoreapp3.0\win-x64\publish
