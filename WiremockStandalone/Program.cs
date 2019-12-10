@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using WireMock.Logging;
@@ -18,31 +19,32 @@ namespace WiremockStandalone
                                               .AddJsonFile(Path.Combine(hostFile, "appsettings.json"), true, true)
                                               .Build();
 
+            var blackListedHeaders = new List<string>();
+            appSettings.GetSection("blackListedHeaders").Bind(blackListedHeaders);
+
             FluentMockServerSettings wiremockSettings = null;
 
             switch (appSettings["mode"])
             {
-                case "Proxy":
-                case "Recorder":
+                case "Record":
                     wiremockSettings = new FluentMockServerSettings
                     {
                         Urls = new[] { appSettings["url"] },
                         AllowPartialMapping = true,
                         StartAdminInterface = true,
-                        ReadStaticMappings = false,
-                        WatchStaticMappings = false,
+                        ReadStaticMappings = true,
+                        WatchStaticMappings = true,
                         Logger = new WireMockConsoleLogger(),
                         ProxyAndRecordSettings = new ProxyAndRecordSettings
                         {
                             Url = appSettings["proxyUrl"],
                             SaveMapping = true,
                             SaveMappingToFile = true,
-                            BlackListedHeaders = null
+                            BlackListedHeaders = blackListedHeaders.ToArray()
                         }
                     };
                     break;
-                case "Read":
-                case "Player":
+                case "Play":
                 default:
                     wiremockSettings = new FluentMockServerSettings
                     {
@@ -56,7 +58,7 @@ namespace WiremockStandalone
                     break;
             }
 
-            StandAloneApp.Start(wiremockSettings);
+            var wiremockServer = StandAloneApp.Start(wiremockSettings);
 
             Console.WriteLine("Press any key to stop the server");
             Console.ReadKey();
