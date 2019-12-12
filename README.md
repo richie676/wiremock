@@ -1,4 +1,4 @@
 # wiremock
 Wiremock Recorder and Player
 
-https://github.com/richie676/wiremock/releases/latest
+https://github.com/richie676/wiremock/releases/latest/download/WiremockStandalone.zip
