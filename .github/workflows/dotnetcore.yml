@@ -22,3 +22,5 @@ jobs:
         name: WiremockStandalone.exe
         # Directory containing files to upload
         path: WiremockStandalone/bin/Release/netcoreapp3.0/win-x64/publish
+    - name: Create Zip File
+      uses: montudor/action-zip@v0.1.0
