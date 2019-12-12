@@ -19,7 +19,7 @@ jobs:
       uses: thedoctor0/zip-release@master
       with:
         filename: 'WiremockStandalone.zip'
-        exclusions: '*.pdb* /*node_modules/* .editorconfig'
+        exclusions: '*.pdb*'
         path: WiremockStandalone/bin/Release/netcoreapp3.0/win-x64/publish
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
