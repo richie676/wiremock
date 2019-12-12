@@ -15,12 +15,15 @@ jobs:
         dotnet-version: 3.0.100
     - name: Publish with dotnet
       run:  dotnet publish -c Release
+    - name: Create Zip File
+      uses: thedoctor0/zip-release@master
+      with:
+        filename: 'WiremockStandalone.zip'
+        path: WiremockStandalone/bin/Release/netcoreapp3.0/win-x64/publish
     - name: Upload artifact
       uses: actions/upload-artifact@v1.0.0
       with:
         # Artifact name
-        name: WiremockStandalone.exe
+        name: WiremockStandalone.zip
         # Directory containing files to upload
         path: WiremockStandalone/bin/Release/netcoreapp3.0/win-x64/publish
-    - name: Create Zip File
-      uses: montudor/action-zip@v0.1.0
